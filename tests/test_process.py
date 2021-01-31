@@ -72,5 +72,20 @@ class TestDataCollectorWithStubs(unittest.TestCase):
             assert self.data_collector.my_driver.is_process_started()
 
 
+class TestDataCollectorWithStubs2(unittest.TestCase):
+
+    def setUp(self) -> None:
+        with TestPairs(MyProcess=MyProcessStub):
+            self.data_collector = DataCollector()
+            self.data_collector.initialize()
+
+    def tearDown(self) -> None:
+        del self.data_collector
+
+    def test_process_started(self):
+        self.data_collector.collect_data()
+        assert self.data_collector.my_driver.is_process_started()
+
+
 if __name__ == '__main__':
     unittest.main()

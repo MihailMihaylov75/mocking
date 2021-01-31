@@ -23,7 +23,6 @@ class TestInput(unittest.TestCase):
         assert read_input() == 'test'
         assert mock_input.call_count == 1
         assert mock_input.called
-        # mock_input.return_value = 'something else'
 
     def test_input4(self):
         mock_input = MagicMock(return_value='test')
@@ -54,7 +53,7 @@ class TestPrint(unittest.TestCase):
         mock_print = MagicMock()
         with mock.patch('builtins.print', mock_print):
             print_input("Hello World!")
-            # assert function is called
+            # assert that function is called
             mock_print.assert_called()
             # assert function is called only once
             mock_print.assert_called_once()
