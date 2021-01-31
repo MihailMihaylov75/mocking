@@ -9,13 +9,13 @@ class TestPairs(object):
     """
     old_objects = []
 
-    def __init__(self, module=None, **test_doubles):
+    def __init__(self, module=None, **test_pairs):
         if module is None:
             modules = sys.modules.values()
         else:
             modules = [module]
         self.old_objects = []
-        for object_name in test_doubles:
+        for object_name in test_pairs:
             for mod_to_patch in modules:
                 if mod_to_patch is not None:
                     if hasattr(mod_to_patch, object_name):
@@ -26,11 +26,11 @@ class TestPairs(object):
                                              object_name, old_object))
                     # The object_name will be changed/added in all modules.
                     # So it is not only stubbed in modules which already have
-                    setattr(mod_to_patch, object_name, test_doubles[object_name])
+                    setattr(mod_to_patch, object_name, test_pairs[object_name])
 
     def exit(self):
         """
-        De-activate the test doubles and re-instate the original objects.
+        De-activate the test pairs and re-instate the original objects.
         """
         self.old_objects.reverse()
         for module, object_name, old_object in self.old_objects:
@@ -47,7 +47,7 @@ class TestPairs(object):
     def __enter__(self):
         """
         Dummy function needed for the context manager. It's dummy because
-        the test doubles are already activated when the TestDouble object is
+        the test pairs are already activated when the TestPairs object is
         instantiated.
         """
         return self
