@@ -13,3 +13,13 @@ class MyProcessStub(object):
 
     def is_process_started(self):
         return self._is_started
+
+
+class CarStub(object):
+
+    def get_make(self):
+        return 'Mock car'
+
+    @property
+    def wheels(self):
+        return 666
